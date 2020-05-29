@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simplex</title>
+  <link rel="shortcut icon" href="./assets/images/favicon.png">
+  <!-- <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="./assets/css/skeleton.css"> -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+  <header>
+    <h3 class="text-center my-4">Implementación del método simplex</h3>
+  </header>
+  <section id="config" class="bg-dark p-4 rounded mb-4">
+    <h6><i>Se puede ingresar hasta un máximo de 3 variables de descición y 3 restricciones</i></h6>
+    <div class="row justify-content-center">
+      <div class="form-group col-auto">
+        <label for="constant_number">Número variables de decisión</label>
+        <input class="form-control form-control-sm" type="text" id="variables_number">
+      </div>
+      <div class="form-group col-auto">
+        <label for="constant_number">Número de restricciones</label>
+        <input class="form-control form-control-sm" type="text" id="restrictions_number">
+      </div>
+    </div>
+  </section>
+  <!-- ENTRACE SECTION -->
+  <section id="entrance" class="bg-dark p-4 rounded">
+    <div id="objective_function">
+      <h5>Fúncion objetivo:</h5>
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <select class="form-control" id="type">
+              <option value="MAX">MAX</option>
+              <option value="MIN">MIN</option>
+            </select>
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">Z = </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="z1" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>1</sub></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="z2" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>2</sub></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="z3" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>3</sub></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5>Sujeto a:</h5>
+    <div id="data_entry">
+      <!-- ROW 1 -->
+      <div class="row justify-content-center">
+        <!-- COL 1 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a11" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>1</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 2 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a12" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>2</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 3 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a13" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">X<sub>3</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- CONTROL 1 -->
+        <div class="col-1">
+          <div class="input-group mb-3">
+            <select id="inequality1" class="custom-select">
+              <option>&lt;=</option>
+              <option>=</option>
+              <option>&gt;=</option>
+            </select>
+          </div>
+        </div>
+        <!-- COL B 1 -->
+        <div class="col-1">
+          <input id="b1" class="form-control" type="text">
+        </div>
+      </div>
+      <!-- ROW 2 -->
+      <div class="row justify-content-center">
+        <!-- COL 1 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a21" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>1</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 2 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a22" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>2</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- col 3 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a23" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">X<sub>3</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- col 4 -->
+        <div class="col-1">
+          <div class="input-group mb-3">
+            <select id="inequality2" class="custom-select">
+              <option>&lt;=</option>
+              <option>=</option>
+              <option>&gt;=</option>
+            </select>
+          </div>
+        </div>
+        <!-- COL 5 -->
+        <div class="col-1">
+          <input id="b2" class="form-control" type="text">
+        </div>
+      </div>
+      <!-- ROW 3 -->
+      <div class="row justify-content-center">
+        <!-- COL 1 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a31" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>1</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 2 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a32" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">X<sub>2</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 3 -->
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <input id="a33" type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">X<sub>3</sub></span>
+            </div>
+          </div>
+        </div>
+        <!-- COL 4 -->
+        <div class="col-1">
+          <div class="input-group mb-3">
+            <select id="inequality3" class="custom-select">
+              <option>&lt;=</option>
+              <option>=</option>
+              <option>&gt;=</option>
+            </select>
+          </div>
+        </div>
+        <!-- COL 5 -->
+        <div class="col-1">
+          <input id="b3" class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+    <!-- CONTROLS -->
+    <div class="row">
+      <div class="col-auto mx-auto">
+        <button class="btn btn-primary" id="resolve_button">Resolver</button>
+
+      </div>
+    </div>
+  </section>
+  <section id="solution" class="bg-dark p-4 rounded">
+    <div class="row">
+      <div class="col-9 mx-auto">
+        <table id="resultado" class="table"></table>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
